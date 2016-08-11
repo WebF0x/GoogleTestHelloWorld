@@ -1,0 +1,8 @@
+# Dependencies files
+*.d
+
+# Objects
+*.o
+
+# Executable
+hello

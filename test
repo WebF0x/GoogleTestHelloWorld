@@ -1,0 +1,14 @@
+#!/bin/bash
+
+clear
+
+echo ========== Setup
+make clean
+make
+
+echo -e "\n========== Should recompile functions.cpp and main.cpp"
+touch functions.h
+make
+
+echo -e "\n========== Teardown"
+make clean
