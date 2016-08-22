@@ -1,5 +1,5 @@
 #include <iostream>
-#include "functions.h"
+#include "../include/functions.h"
 
 int main(){
     print_hello();

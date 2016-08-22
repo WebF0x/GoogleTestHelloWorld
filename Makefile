@@ -1,4 +1,8 @@
-OBJS := main.o hello.o factorial.o
+SOURCE_DIR = source
+
+OBJS := $(SOURCE_DIR)/main.o \
+	$(SOURCE_DIR)/hello.o \
+	$(SOURCE_DIR)/factorial.o
 
 -include $(OBJS:.o=.d)
 
@@ -11,4 +15,4 @@ hello: $(OBJS)
 	 g++ -c -MMD -o $@ $<
 
 clean:
-	rm -f hello *.o *.d
+	rm -f hello source/*.o source/*.d

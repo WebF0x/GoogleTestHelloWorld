@@ -7,7 +7,7 @@ make clean
 make
 
 echo -e "\n========== Should recompile functions.cpp and main.cpp"
-touch functions.h
+touch include/functions.h
 make
 
 echo -e "\n========== Teardown"
