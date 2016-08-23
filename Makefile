@@ -1,19 +1,22 @@
 SOURCE_DIR = source
+OBJ_DIR = obj
+BIN_DIR = bin
 
-OBJS := $(SOURCE_DIR)/main.o \
-	$(SOURCE_DIR)/hello.o \
-	$(SOURCE_DIR)/factorial.o
+OBJS := $(OBJ_DIR)/main.o \
+	$(OBJ_DIR)/hello.o \
+	$(OBJ_DIR)/factorial.o
 
 -include $(OBJS:.o=.d)
 
 all: hello
 
 hello: $(OBJS)
-	@mkdir bin/
+	@mkdir -p bin/
 	g++ -o bin/hello $(OBJS)
 
-%.o: %.cpp
+$(OBJ_DIR)/%.o: $(SOURCE_DIR)/%.cpp
+	@mkdir -p obj/
 	 g++ -c -MMD -o $@ $<
 
 clean:
-	rm -fr bin/ source/*.o source/*.d
+	rm -fr $(BIN_DIR) $(OBJ_DIR)
