@@ -1,21 +1,24 @@
 SOURCE_DIR = source
 OBJ_DIR = obj
 BIN_DIR = bin
+EXECUTABLE := $(BIN_DIR)/hello
 
-OBJS := $(OBJ_DIR)/main.o \
+OBJECTS := $(OBJ_DIR)/main.o \
 	$(OBJ_DIR)/hello.o \
 	$(OBJ_DIR)/factorial.o
 
--include $(OBJS:.o=.d)
+DEPENDENCIES := $(OBJECTS:.o=.d)
 
-all: hello
+-include $(DEPENDENCIES)
 
-hello: $(OBJS)
-	@mkdir -p bin/
-	g++ -o bin/hello $(OBJS)
+all: $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	@mkdir -p $(BIN_DIR)
+	g++ -o $(EXECUTABLE) $(OBJECTS)
 
 $(OBJ_DIR)/%.o: $(SOURCE_DIR)/%.cpp
-	@mkdir -p obj/
+	@mkdir -p $(OBJ_DIR)
 	 g++ -c -MMD -o $@ $<
 
 clean:
