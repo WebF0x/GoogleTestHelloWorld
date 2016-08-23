@@ -9,10 +9,11 @@ OBJS := $(SOURCE_DIR)/main.o \
 all: hello
 
 hello: $(OBJS)
-	g++ -o hello $(OBJS)
+	@mkdir bin/
+	g++ -o bin/hello $(OBJS)
 
 %.o: %.cpp
 	 g++ -c -MMD -o $@ $<
 
 clean:
-	rm -f hello source/*.o source/*.d
+	rm -fr bin/ source/*.o source/*.d
