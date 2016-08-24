@@ -9,8 +9,6 @@ OBJECTS := $(OBJ_DIR)/main.o \
 
 DEPENDENCIES := $(OBJECTS:.o=.d)
 
--include $(DEPENDENCIES)
-
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
@@ -20,6 +18,8 @@ $(EXECUTABLE): $(OBJECTS)
 $(OBJ_DIR)/%.o: $(SOURCE_DIR)/%.cpp
 	@mkdir -p $(OBJ_DIR)
 	 g++ -c -MMD -o $@ $<
+
+-include $(DEPENDENCIES)
 
 clean:
 	rm -fr $(BIN_DIR) $(OBJ_DIR)
