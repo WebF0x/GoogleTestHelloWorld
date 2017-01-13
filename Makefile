@@ -1,25 +1,64 @@
-SOURCE_DIR = source
+# Build settings
+CXX = g++ # C++ Compiler
+LD = g++ # Linker
+INCLUDE = -Iinclude
+CFLAGS = -g -std=c++14
 OBJ_DIR = obj
 BIN_DIR = bin
-EXECUTABLE := $(BIN_DIR)/hello
 
-OBJECTS := $(OBJ_DIR)/main.o \
-	$(OBJ_DIR)/hello.o \
-	$(OBJ_DIR)/factorial.o
+# Libraries
+LIBRARIES_TEST =
+LIBRARIES_APP =
 
-DEPENDENCIES := $(OBJECTS:.o=.d)
+# Executable path
+EXECUTABLE_TEST = $(BIN_DIR)/test/test
+EXECUTABLE_APP = $(BIN_DIR)/app/app
 
-all: $(EXECUTABLE)
+# Source files
+SOURCES_TEST = test/main.cpp \
+	source/factorial.cpp \
+	source/hello.cpp
+SOURCES_APP = source/main.cpp \
+	source/factorial.cpp \
+	source/hello.cpp
 
-$(EXECUTABLE): $(OBJECTS)
-	@mkdir -p $(BIN_DIR)
-	g++ -o $(EXECUTABLE) $(OBJECTS)
+# Objects
+OBJECTS_TEST := $(SOURCES_TEST:%.cpp=$(OBJ_DIR)/%.o)
+OBJECTS_APP := $(SOURCES_APP:%.cpp=$(OBJ_DIR)/%.o)
 
-$(OBJ_DIR)/%.o: $(SOURCE_DIR)/%.cpp
-	@mkdir -p $(OBJ_DIR)
-	 g++ -c -MMD -o $@ $<
+# Build targets
+all: test app
+test: $(EXECUTABLE_TEST)
+app: $(EXECUTABLE_APP)
 
--include $(DEPENDENCIES)
+# Link executable
+$(EXECUTABLE_TEST): $(OBJECTS_TEST)
+	@echo Linking: $@
+	@mkdir -p $(@D)
+	@$(LD) -o $@ $^ $(LIBRARIES_TEST)
 
+$(EXECUTABLE_APP): $(OBJECTS_APP)
+	@echo Linking: $@
+	@mkdir -p $(@D)
+	@$(LD) -o $@ $^ $(LIBRARIES_APP)
+
+# Compile only if a dependency was modified
+DEPENDENCIES_TEST := $(OBJECTS_TEST:.o=.d)
+DEPENDENCIES_APP := $(OBJECTS_APP:.o=.d)
+-include $(DEPENDENCIES_TEST)
+-include $(DEPENDENCIES_APP)
+
+# Rule to compile any object
+$(OBJ_DIR)/%.o: %.cpp
+	@echo Compiling: $@
+	@mkdir -p $(@D)
+	@$(CXX) $(CFLAGS) $(INCLUDE) -c -MMD -o $@ $<
+
+# Erase generated files
 clean:
-	rm -fr $(BIN_DIR) $(OBJ_DIR)
+	@echo Cleaning
+	@rm -rf $(OBJ_DIR) $(BIN_DIR)
+
+# Tell 'make' these rules do not have a corresponding file
+# Without this, an unrelated file with the same name as the build rule could prevent from building
+.PHONY: clean all test app
