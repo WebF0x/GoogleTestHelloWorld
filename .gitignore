@@ -1,8 +1,5 @@
-# Dependencies files
-*.d
-
 # Objects
-*.o
+obj/
 
 # Executable
-hello
+bin/

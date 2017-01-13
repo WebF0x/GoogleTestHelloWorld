@@ -9,7 +9,7 @@ echo -e "\n========== Should compile everything and link"
 make
 
 echo -e "\n========== Should recompile everything and link"
-touch include/functions.h
+touch include/functions.hpp
 make
 
 echo -e "\n========== Should recompile main only and link"

@@ -1,7 +1,9 @@
 #include <iostream>
-#include "../include/functions.h"
 
-int main(){
+#include "functions.hpp"
+
+int main()
+{
     print_hello();
     std::cout << std::endl;
     std::cout << "The factorial of 5 is " << factorial(5) << std::endl;
