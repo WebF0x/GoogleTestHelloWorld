@@ -1,5 +1,6 @@
 #include <cassert>
 
+#include "gtest/gtest.h"
 #include "functions.hpp"
 
 void test_factorial()
@@ -12,9 +13,15 @@ void test_factorial()
     assert(factorial(5) == 120);
 }
 
+void test_google_test()
+{
+    EXPECT_EQ(1, 1);
+}
+
 int main()
 {
     test_factorial();
+    test_google_test();
 
     return 0;
 }

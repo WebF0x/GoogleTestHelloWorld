@@ -1,5 +1,2 @@
-# Objects
-obj/
-
-# Executable
-bin/
+# Build
+build/
