@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(CMakeTest)
+project(GoogleTestHelloWorld)
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in
@@ -38,7 +38,7 @@ include_directories("${gtest_SOURCE_DIR}/include")
 file(GLOB SOURCES "source/*.cpp")
 file(GLOB TEST_SOURCES "test/*.cpp")
 
-add_executable(CMakeTest ${SOURCES} app/main.cpp)
-add_executable(Test ${SOURCES} ${TEST_SOURCES})
+add_executable(google_test_hello_world ${SOURCES} app/main.cpp)
+add_executable(run_unit_tests ${SOURCES} ${TEST_SOURCES})
 
-target_link_libraries(Test gtest)
+target_link_libraries(run_unit_tests gtest)
