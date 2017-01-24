@@ -41,4 +41,4 @@ file(GLOB TEST_SOURCES "test/*.cpp")
 add_executable(google_test_hello_world ${SOURCES} app/main.cpp)
 add_executable(run_unit_tests ${SOURCES} ${TEST_SOURCES})
 
-target_link_libraries(run_unit_tests gtest gtest_main)
+target_link_libraries(run_unit_tests gtest gmock gmock_main)
