@@ -13,4 +13,5 @@ Build:
 - `mkdir build`
 - `cd build`
 - `cmake ..`
-- `make`
+- `make run_unit_tests`
+- `./run_unit_tests`
